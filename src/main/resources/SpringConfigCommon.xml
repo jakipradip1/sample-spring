@@ -1,0 +1,60 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:p="http://www.springframework.org/schema/p"	
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa" 
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd 
+http://www.springframework.org/schema/jee 
+http://www.springframework.org/schema/jee/spring-jee.xsd 
+http://www.springframework.org/schema/tx 
+http://www.springframework.org/schema/tx/spring-tx.xsd
+http://www.springframework.org/schema/data/jpa 
+http://www.springframework.org/schema/data/jpa/spring-jpa.xsd 
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-2.5.xsd
+http://www.springframework.org/schema/util 
+http://www.springframework.org/schema/util/spring-util.xsd
+http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop.xsd">	
+
+	
+	<bean id="drugVOCon" class="com.jakipradip.vo.DrugVO" scope="prototype">
+			<constructor-arg index="1" value="2500" type="java.lang.Long"></constructor-arg>
+		<constructor-arg index="0" value="Advil_20mg" type="java.lang.String"></constructor-arg>
+	</bean>
+	
+	<bean id="drugVOCon1" class="com.jakipradip.vo.DrugVO" scope="prototype">
+			<constructor-arg index="1" value="MyDrug" type="java.lang.String"></constructor-arg>
+		<constructor-arg index="0" value="Advil_20mg" type="java.lang.String"></constructor-arg>
+	</bean>
+	
+	<bean id="drugVO" class="com.jakipradip.vo.DrugVO" init-method="initialize" destroy-method="destroy">
+		<property name="drugId" value="1000"></property>
+		<property name="durgName" value="Asprin"></property>
+
+		<property name="drugDesc" value="Headache"></property>
+
+		<property name="manufacture" value="Dummy"></property>
+		
+		<property name="count" value="5"></property>
+	</bean>
+	
+	<bean id="abstract1" class="com.jakipradip.service.AbstractService" abstract="true" scope="prototype">
+		<property name="manufacturer" value="Walgreen"></property>
+		<property name="defaultDrug" ref="drugVO"></property>
+		<property name="notifyService" ref="emailNS"></property>
+	</bean>
+
+	
+	<bean id="smsNS" class="com.jakipradip.service.SMSNotifyService"></bean>
+		<bean id="emailNS" class="com.jakipradip.service.EmailNotiyService"></bean>
+	
+	
+	
+	
+</beans>
